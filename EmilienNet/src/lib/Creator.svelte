@@ -6,20 +6,19 @@
 	import { Button, Icon, Modal, ModalBody, ModalFooter, ModalHeader } from 'sveltestrap';
 
 	$editor_elements = [{ type: 'h1', content: 'welcome to EmilienEditor2000' }];
-	$editor_title = "Document's title";
+	$editor_title = 'Document title';
 	let open = false;
-	let website_id: string | undefined
+	let website_id: string | undefined;
 	const toggle = () => (open = !open);
 
 	async function save_website() {
 		website_id = await add_website($editor_title, $editor_elements);
 		if (website_id === undefined) {
-			alert("An error has occured.")
-			return
+			alert('An error has occured.');
+			return;
 		}
 		toggle();
 	}
-	
 </script>
 
 <main>
@@ -36,7 +35,7 @@
 	<Modal isOpen={open} {toggle}>
 		<ModalHeader {toggle}>Website saved</ModalHeader>
 		<ModalBody>
-			Your website was saved with succes !<br>
+			Your website was saved with succes !<br />
 			Id: {website_id}
 		</ModalBody>
 		<ModalFooter>

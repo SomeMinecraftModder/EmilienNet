@@ -4,7 +4,7 @@
 		"allowJs": true,
 		"checkJs": true,
 		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
+		"forceConsistentCasingInFileNames": false, //COMMENT IN JSON???
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,

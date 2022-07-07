@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { editor_elements } from './Elements';
 	import { remove_array_index } from './remove_array_index';
-	import { ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'sveltestrap';
-	import { swap_array} from '$lib/swap_array'
+	import { ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle, Icon } from 'sveltestrap';
+	import { swap_array } from '$lib/swap_array';
 
 	export let type: string;
 	export let content: string;
@@ -21,11 +21,11 @@
 	}
 
 	function move_down() {
-		$editor_elements = swap_array($editor_elements, index, index+1)
+		$editor_elements = swap_array($editor_elements, index, index + 1);
 	}
 
 	function move_up() {
-		$editor_elements = swap_array($editor_elements, index, index-1)
+		$editor_elements = swap_array($editor_elements, index, index - 1);
 	}
 </script>
 
@@ -33,15 +33,15 @@
 	<svelte:element this={type} class="fragment-box anim-over">
 		<span contenteditable="true" bind:innerHTML={content} on:keypress={update}>{content}</span>
 		<ButtonDropdown>
-			<DropdownToggle color="primary" caret>Option</DropdownToggle>
+			<DropdownToggle color="primary" caret><Icon name="bi bi-gear-fill" /> Option</DropdownToggle>
 			<DropdownMenu>
 				<DropdownItem
 					on:click={() => {
 						editor_elements.set(remove_array_index(elements, index));
-					}}>Delete</DropdownItem
+					}}><Icon name="bi bi-trash" /> Delete</DropdownItem
 				>
-				<DropdownItem on:click={move_up}>Move up</DropdownItem>
-				<DropdownItem on:click={move_down}>Move down</DropdownItem>
+				<DropdownItem on:click={move_up}><Icon name="bi bi-arrow-up" /> Move up</DropdownItem>
+				<DropdownItem on:click={move_down}><Icon name="bi bi-arrow-down" /> Move down</DropdownItem>
 			</DropdownMenu>
 		</ButtonDropdown>
 	</svelte:element>
@@ -53,7 +53,7 @@
 
 <style>
 	.fragment-box {
-		width: 50px;
+		width: max-content;
 		margin: 0.5rem;
 		padding: 0.5rem 1rem;
 	}
@@ -61,7 +61,7 @@
 	.anim-over {
 		width: max-content;
 		color: black;
-		border-radius: .5rem;
+		border-radius: 0.5rem;
 		background-color: white;
 		transition: all 0.2s ease-in-out;
 	}
