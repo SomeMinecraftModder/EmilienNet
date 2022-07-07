@@ -1,4 +1,4 @@
-import { db } from '$lib/firebase';
+import { db } from '$lib/_firebase';
 import { addDoc, collection } from 'firebase/firestore';
 
 export async function add_website(title: string, content: object) {
@@ -8,6 +8,7 @@ export async function add_website(title: string, content: object) {
 			content: JSON.stringify(content)
 		});
 		console.debug('Document written with ID: ', docRef.id);
+		return docRef.id
 	} catch (e) {
 		console.error('Error adding document: ', e);
 	}

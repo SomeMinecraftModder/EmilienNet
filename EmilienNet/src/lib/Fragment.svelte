@@ -2,6 +2,7 @@
 	import { editor_elements } from './Elements';
 	import { remove_array_index } from './remove_array_index';
 	import { ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'sveltestrap';
+	import { swap_array} from '$lib/swap_array'
 
 	export let type: string;
 	export let content: string;
@@ -18,6 +19,14 @@
 		temp_els[index].content = content;
 		$editor_elements = temp_els;
 	}
+
+	function move_down() {
+		$editor_elements = swap_array($editor_elements, index, index+1)
+	}
+
+	function move_up() {
+		$editor_elements = swap_array($editor_elements, index, index-1)
+	}
 </script>
 
 {#if is_editing}
@@ -31,7 +40,8 @@
 						editor_elements.set(remove_array_index(elements, index));
 					}}>Delete</DropdownItem
 				>
-				<DropdownItem>Quo Action</DropdownItem>
+				<DropdownItem on:click={move_up}>Move up</DropdownItem>
+				<DropdownItem on:click={move_down}>Move down</DropdownItem>
 			</DropdownMenu>
 		</ButtonDropdown>
 	</svelte:element>
@@ -51,8 +61,9 @@
 	.anim-over {
 		width: max-content;
 		color: black;
+		border-radius: .5rem;
 		background-color: white;
-		transition: all 0.1s ease-in-out;
+		transition: all 0.2s ease-in-out;
 	}
 
 	.anim-over:hover {
