@@ -3,6 +3,7 @@
 	import { remove_array_index } from './remove_array_index';
 	import { ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle, Icon } from 'sveltestrap';
 	import { swap_array } from '$lib/swap_array';
+	import { fly } from 'svelte/transition';
 
 	export let type: string;
 	export let content: string;
@@ -30,8 +31,14 @@
 </script>
 
 {#if is_editing}
-	<svelte:element this={type} class="fragment-box anim-over">
-		<span contenteditable="true" bind:innerHTML={content} on:keypress={update}>{content}</span>
+	<div class="fragment-box anim-over" transition:fly={{ x: -200, duration: 500 }}>
+		<svelte:element
+			this={type}
+			contenteditable="true"
+			bind:innerHTML={content}
+			on:keypress={update}
+			on:keypress={update}>{content}</svelte:element
+		>
 		<ButtonDropdown>
 			<DropdownToggle color="primary" caret><Icon name="bi bi-gear-fill" /> Option</DropdownToggle>
 			<DropdownMenu>
@@ -44,10 +51,10 @@
 				<DropdownItem on:click={move_down}><Icon name="bi bi-arrow-down" /> Move down</DropdownItem>
 			</DropdownMenu>
 		</ButtonDropdown>
-	</svelte:element>
+	</div>
 {:else}
 	<svelte:element this={type} class="fragment-box">
-		<span>{content}</span>
+		{@html content}
 	</svelte:element>
 {/if}
 

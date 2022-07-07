@@ -29,14 +29,14 @@
 		<h2><input bind:value={$editor_title} /></h2>
 		<CreatorControl />
 	</div>
-	{#each $editor_elements as element, index}
+	{#each $editor_elements as element, index (element)}
 		<Fragment type={element.type} content={element.content} is_editing={true} {index} />
 	{/each}
 	<Modal isOpen={open} {toggle}>
 		<ModalHeader {toggle}>Website saved</ModalHeader>
 		<ModalBody>
 			Your website was saved with succes !<br />
-			Id: {website_id}
+			Link: <a href={`/api/${website_id}/web`}>website</a>
 		</ModalBody>
 		<ModalFooter>
 			<Button color="primary" on:click={toggle}>Ok</Button>
