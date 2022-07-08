@@ -5,5 +5,5 @@
 
 <h1>{$editor_title}</h1>
 {#each $editor_elements as frag, index}
-	<Fragment type={frag.type} content={frag.content} is_editing={false} {index} />
+	<Fragment type={frag.type} content={frag.content} is_editing={false} info={frag.info} {index} />
 {/each}

@@ -5,7 +5,7 @@
 	import { add_website } from '$lib/add_website';
 	import { Button, Icon, Modal, ModalBody, ModalFooter, ModalHeader } from 'sveltestrap';
 
-	$editor_elements = [{ type: 'h1', content: 'welcome to EmilienEditor2000' }];
+	$editor_elements = [{ type: 'h1', content: 'welcome to EmilienEditor2000', info: {} }];
 	$editor_title = 'Document title';
 	let open = false;
 	let website_id: string | undefined;
@@ -30,10 +30,16 @@
 		<CreatorControl />
 	</div>
 	{#each $editor_elements as element, index (element)}
-		<Fragment type={element.type} content={element.content} is_editing={true} {index} />
+		<Fragment
+			type={element.type}
+			content={element.content}
+			is_editing={true}
+			info={element.info}
+			{index}
+		/>
 	{/each}
 	<Modal isOpen={open} {toggle}>
-		<ModalHeader {toggle}>Website saved</ModalHeader>
+		<ModalHeader {toggle}>Website saved !</ModalHeader>
 		<ModalBody>
 			Your website was saved with succes !<br />
 			Link: <a href={`/api/${website_id}/web`}>website</a>
