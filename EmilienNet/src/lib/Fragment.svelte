@@ -37,7 +37,10 @@
 			contenteditable="true"
 			bind:innerHTML={content}
 			on:keypress={update}
-			on:keypress={update}>{content}</svelte:element
+			on:keypress={update}
+			on:change={update}
+			on:blur={update}
+			on:focus={update}>{content}</svelte:element
 		>
 		<ButtonDropdown>
 			<DropdownToggle color="primary" caret><Icon name="bi bi-gear-fill" /> Option</DropdownToggle>

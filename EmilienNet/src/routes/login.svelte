@@ -1,10 +1,14 @@
 <script lang="ts">
+	import { auth } from '$lib/_firebase';
+
 	import { is_signed, login_user } from '$lib/_firebase_utils';
+	import { EmailAuthProvider, signInWithPopup } from 'firebase/auth';
 
 	let email: string;
 	let password: string;
 
 	function login() {
+		signInWithPopup(auth, EmailAuthProvider);
 		let info = login_user(email, password);
 		if (info === undefined) {
 			alert('wtf just happened');

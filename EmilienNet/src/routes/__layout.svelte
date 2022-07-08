@@ -1,6 +1,5 @@
 <script>
 	import { NavLink, Nav, NavItem } from 'sveltestrap';
-	import { is_signed } from '$lib/_firebase_utils';
 </script>
 
 <svelte:head>
@@ -23,7 +22,6 @@
 		gtag('config', 'G-3T75BCL5QP');
 	</script>
 </svelte:head>
-{is_signed()}
 <Nav>
 	<NavItem>
 		<NavLink href="/">Home</NavLink>
