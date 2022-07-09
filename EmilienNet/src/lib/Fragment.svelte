@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { editor_elements } from './Elements';
 	import { remove_array_index } from './remove_array_index';
+	import RenderFragment from './render_fragment.svelte';
 	import {
 		Button,
 		ButtonDropdown,
@@ -56,32 +57,16 @@
 	</ModalFooter>
 </Modal>
 
+<span on:update={update}></span>
+
 {#if is_editing}
+	<div class="fragment-box">
+		<RenderFragment {is_editing} {type} {content} {info} />
+	</div>
+{:else}
 	<div class="fragment-box anim-over" transition:fly={{ x: -200, duration: 500 }}>
-		{#if type === 'img'}
-			<svelte:element
-				this={type}
-				src={info['img']}
-				contenteditable="true"
-				bind:innerHTML={content}
-				on:keypress={update}
-				on:keypress={update}
-				on:change={update}
-				on:blur={update}
-				on:focus={update}
-			/>
-		{:else}
-			<svelte:element
-				this={type}
-				contenteditable="true"
-				bind:innerHTML={content}
-				on:keypress={update}
-				on:keypress={update}
-				on:change={update}
-				on:blur={update}
-				on:focus={update}>{content}</svelte:element
-			>
-		{/if}
+		<RenderFragment {is_editing} {type} {content} {info} />
+
 		<ButtonDropdown>
 			<DropdownToggle color="primary" caret><Icon name="bi bi-gear-fill" /> Option</DropdownToggle>
 			<DropdownMenu>
@@ -100,14 +85,6 @@
 			</DropdownMenu>
 		</ButtonDropdown>
 	</div>
-{:else if !is_editing}
-	{#if type === 'img'}
-		<svelte:element this={type} class="fragment-box" src={info['img']} />
-	{:else}
-		<svelte:element this={type} class="fragment-box">
-			{@html content}
-		</svelte:element>
-	{/if}
 {/if}
 
 <style>
